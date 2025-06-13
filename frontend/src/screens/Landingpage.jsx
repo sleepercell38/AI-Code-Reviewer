@@ -6,22 +6,22 @@ const Landingpage = () => {
 
   return (
     <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-      <video
-        src="/public/original-54809559b7276d304fee12518b8ab752.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: -1,
-        }}
-      />
+     <video
+  src="/original-54809559b7276d304fee12518b8ab752.mp4"
+  autoPlay
+  loop
+  muted
+  playsInline
+  style={{
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    zIndex: -1,
+  }}
+/>
       <nav >
         <h2    
         
