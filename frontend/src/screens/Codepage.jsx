@@ -42,16 +42,21 @@ const Codepage = () => {
     }
 
 
+const [loading, setLoading] = useState(false);
 
-    async function reviewCode() {
-
-        const formattedPrompt = `Please review the following ${language} code and provide detailed feedback:\n\n\`\`\`${language}\n${code}\n\`\`\``
-
-
-        const response = await axios.post("/ai/ai-getreview", { code: formattedPrompt })
-        console.log(response.data)
-        setreview(response.data)
+async function reviewCode() {
+    setLoading(true);
+    setreview(null); // Optionally clear previous review
+    try {
+        const formattedPrompt = `Please review the following ${language} code and provide detailed feedback:\n\n\`\`\`${language}\n${code}\n\`\`\``;
+        const response = await axios.post("/ai/ai-getreview", { code: formattedPrompt });
+        setreview(response.data);
+    } catch (error) {
+        setreview("An error occurred while fetching the review.");
+    } finally {
+        setLoading(false);
     }
+}
 
 
 
@@ -145,11 +150,18 @@ const Codepage = () => {
                         </button>
                     </div>
                 </div>
-                <div className="right bg-[#343434] h-full w-[50%] rounded-3xl p-4 text-[#e2e8f0] text-m overflow-scroll">
-                    <Markdowm>
-                        {review}
-                    </Markdowm>
-                </div>
+              <div className="right bg-[#343434] h-full w-[50%] rounded-3xl p-4 text-[#e2e8f0] text-m overflow-scroll">
+    {loading ? (
+        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+            <div className="loader" />
+            <span>Loading review...</span>
+        </div>
+    ) : (
+        <Markdowm>
+            {review}
+        </Markdowm>
+    )}
+</div>
             </main>
 
 
